@@ -14,6 +14,13 @@ public class Env extends Environment {
     private Logger logger = Logger.getLogger("jason_miners."+Env.class.getName());
     WorldModel  model;
 
+    Term                    up       = Literal.parseLiteral("do(up)");
+    Term                    down     = Literal.parseLiteral("do(down)");
+    Term                    right    = Literal.parseLiteral("do(right)");
+    Term                    left     = Literal.parseLiteral("do(left)");
+    Term                    skip     = Literal.parseLiteral("do(skip)");
+    Term                    pick     = Literal.parseLiteral("do(pick)");
+
     /** Called before the MAS execution with the args informed in .mas2j */
     @Override
     public void init(String[] args) {
@@ -28,11 +35,39 @@ public class Env extends Environment {
 
     @Override
     public boolean executeAction(String agName, Structure action) {
-        logger.info("executing: "+action+", but not implemented!");
-        if (true) { // you may improve this condition
-             informAgsEnvironmentChanged();
+        {
+        boolean result = false;
+        try {
+            // get the agent id based on its name
+            int agId = getAgIdBasedOnName(agName);
+
+            if (action.equals(up)) {
+                result = model.move("UP", agId);
+            } else if (action.equals(down)) {
+                result = model.move("DOWN", agId);
+            } else if (action.equals(right)) {
+                result = model.move("RIGHT", agId);
+            } else if (action.equals(left)) {
+                result = model.move("LEFT", agId);
+            } else if (action.equals(skip)) {
+                result = true;
+            } else {
+                logger.info("executing: " + action + ", but not implemented!");
+            }
+            if (result) {
+                updateAgPercept(agId);
+                return true;
+            }
+        } catch (InterruptedException e) {
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "error executing " + action + " for " + agName, e);
+            }
+            return false;
         }
-        return true; // the action was executed with success
+    }
+
+    private int getAgIdBasedOnName(String agName) {
+        return (Integer.parseInt(agName.substring(5))) - 1;
     }
 
     /** Called before the end of MAS execution */

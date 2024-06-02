@@ -38,4 +38,31 @@ public class WorldModel extends GridWorldModel {
         agWithGold.remove(ag);
     }
 
+     boolean move(String dir, int ag) throws Exception {
+        Location l = getAgPos(ag);
+        switch (dir) {
+        case "UP":
+            if (isFree(l.x, l.y - 1)) {
+                setAgPos(ag, l.x, l.y - 1);
+            }
+            break;
+        case "DOWN":
+            if (isFree(l.x, l.y + 1)) {
+                setAgPos(ag, l.x, l.y + 1);
+            }
+            break;
+        case "RIGHT":
+            if (isFree(l.x + 1, l.y)) {
+                setAgPos(ag, l.x + 1, l.y);
+            }
+            break;
+        case "LEFT":
+            if (isFree(l.x - 1, l.y)) {
+                setAgPos(ag, l.x - 1, l.y);
+            }
+            break;
+        }
+        return true;
+    }
+
 }
