@@ -11,11 +11,13 @@ import java.util.logging.*;
 public class Env extends Environment {
 
     private Logger logger = Logger.getLogger("jason_miners."+Env.class.getName());
+    WorldModel  model;
 
     /** Called before the MAS execution with the args informed in .mas2j */
     @Override
     public void init(String[] args) {
         super.init(args);
+        model = WorldModel.world();
         try {
             addPercept(ASSyntax.parseLiteral("percept("+args[0]+")"));
         } catch (ParseException e) {
