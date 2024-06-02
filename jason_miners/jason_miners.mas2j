@@ -14,8 +14,7 @@ MAS jason_miners {
 
     environment: example.Env(10)
 
-    agents: bob;
-            alice;
+    agents: miner #4;
 
     aslSourcePath: "src/agt";
 }
