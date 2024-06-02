@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import example.Env.Move;
+
 public class WorldModel extends GridWorldModel {
 
     public static final int   GOLD  = 16;
@@ -38,25 +40,25 @@ public class WorldModel extends GridWorldModel {
         agWithGold.remove(ag);
     }
 
-     boolean move(String dir, int ag) throws Exception {
+     boolean move(Move dir, int ag) throws Exception {
         Location l = getAgPos(ag);
         switch (dir) {
-        case "UP":
+        case UP:
             if (isFree(l.x, l.y - 1)) {
                 setAgPos(ag, l.x, l.y - 1);
             }
             break;
-        case "DOWN":
+        case DOWN:
             if (isFree(l.x, l.y + 1)) {
                 setAgPos(ag, l.x, l.y + 1);
             }
             break;
-        case "RIGHT":
+        case RIGHT:
             if (isFree(l.x + 1, l.y)) {
                 setAgPos(ag, l.x + 1, l.y);
             }
             break;
-        case "LEFT":
+        case LEFT:
             if (isFree(l.x - 1, l.y)) {
                 setAgPos(ag, l.x - 1, l.y);
             }

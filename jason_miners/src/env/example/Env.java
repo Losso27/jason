@@ -21,6 +21,10 @@ public class Env extends Environment {
     Term                    skip     = Literal.parseLiteral("do(skip)");
     Term                    pick     = Literal.parseLiteral("do(pick)");
 
+    public enum Move {
+        UP, DOWN, RIGHT, LEFT
+    };
+
     /** Called before the MAS execution with the args informed in .mas2j */
     @Override
     public void init(String[] args) {
@@ -42,13 +46,13 @@ public class Env extends Environment {
             int agId = getAgIdBasedOnName(agName);
 
             if (action.equals(up)) {
-                result = model.move("UP", agId);
+                result = model.move(Move.UP, agId);
             } else if (action.equals(down)) {
-                result = model.move("DOWN", agId);
+                result = model.move(Move.DOWN, agId);
             } else if (action.equals(right)) {
-                result = model.move("RIGHT", agId);
+                result = model.move(Move.RIGHT, agId);
             } else if (action.equals(left)) {
-                result = model.move("LEFT", agId);
+                result = model.move(Move.LEFT, agId);
             } else if (action.equals(skip)) {
                 result = true;
             } else {
@@ -88,7 +92,7 @@ public class Env extends Environment {
     }
 
     private void updateAgsPercept() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i <= 3; i++) {
             updateAgPercept(i);
         }
     }
