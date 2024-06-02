@@ -17,10 +17,10 @@ public class Env extends Environment {
     @Override
     public void init(String[] args) {
         super.init(args);
-        model = WorldModel.world();
         try {
+            model = new WorldModel();
             addPercept(ASSyntax.parseLiteral("percept("+args[0]+")"));
-        } catch (ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

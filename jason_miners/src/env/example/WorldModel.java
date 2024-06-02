@@ -14,6 +14,15 @@ public class WorldModel extends GridWorldModel {
 
     Location                  depot;
 
+    public WorldModel() throws Exception {
+        super(21, 21, 4);
+        this.setDepot(5, 7);
+        this.setAgPos(0, 1, 0);
+        this.setAgPos(1, 20, 0);
+        this.setAgPos(2, 3, 20);
+        this.setAgPos(3, 20, 20);
+        this.setGold(10,10);
+    }
     public void setDepot(int x, int y) {
         depot = new Location(x, y);
         data[x][y] = DEPOT;
@@ -21,17 +30,6 @@ public class WorldModel extends GridWorldModel {
 
     public void setGold(int x, int y) {
         data[x][y] = GOLD;
-    }
-
-    static WorldModel world() throws Exception {
-        super(21, 21, 4);
-        model.setDepot(5, 7);
-        model.setAgPos(0, 1, 0);
-        model.setAgPos(1, 20, 0);
-        model.setAgPos(2, 3, 20);
-        model.setAgPos(3, 20, 20);
-        model.setGold(10,10);
-        return model;
     }
 
 }
