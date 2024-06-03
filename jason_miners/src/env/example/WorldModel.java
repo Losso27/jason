@@ -23,6 +23,9 @@ public class WorldModel extends GridWorldModel {
         this.setAgPos(2, 3, 20);
         this.setAgPos(3, 20, 20);
         this.setGold(10,10);
+        this.setGold(11,10);
+        this.setGold(10,11);
+        this.setGold(11,11);
     }
 
     public void setGold(int x, int y) {
